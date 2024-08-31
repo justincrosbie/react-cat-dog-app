@@ -1,46 +1,87 @@
-# Getting Started with Create React App
+# Cat and Dog Facts App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React application that displays random facts about cats and dogs. It features infinite scrolling and allows users to filter facts by animal type.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Display random facts about cats and dogs
+- Filter facts by cat, dog, or both
+- Infinite scrolling to load more facts
+- Responsive design for mobile and desktop
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Before you begin, ensure you have met the following requirements:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- You have installed Node.js (version 20.0 or later)
 
-### `npm test`
+## Installing Cat and Dog Facts App
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To install the Cat and Dog Facts App, follow these steps:
 
-### `npm run build`
+1. Clone the repository:
+   ```
+   git clone https://github.com/justincrosbie/react-cat-dog-facts.git
+   ```
+2. Navigate to the project directory:
+   ```
+   cd react-cat-dog-facts
+   ```
+3. Install the dependencies:
+   ```
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Configuring the API Endpoint
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+By default, the app uses `https://cat-fact.herokuapp.com/facts/random` as the API endpoint. You can override this by setting the `REACT_APP_API_BASE_URL` environment variable.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Using a .env file
 
-### `npm run eject`
+1. Create a file named `.env` in the root of your project.
+2. Add the following line to the file, replacing the URL with your desired API endpoint:
+   ```
+   REACT_APP_API_BASE_URL=https://your-api-endpoint.com/facts/random
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Using Cat and Dog Facts App
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To use the Cat and Dog Facts App, follow these steps:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Start the development server:
+   ```
+   npm start
+   ```
+2. Open your web browser and visit `http://localhost:3000`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The app should now be running and you can start exploring cat and dog facts!
 
-## Learn More
+## Running the Local API Server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This app can also use a local API server to serve facts, for testing purposes. To run the server:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Navigate to the server directory:
+   ```
+   cd server
+   ```
+2. Install server dependencies (if you haven't already):
+   ```
+   npm install
+   ```
+3. Start the server:
+   ```
+   node server.js
+   ```
+
+The server will start running on `http://localhost:3001`.
+Be sure to configure the client to connect to the server, by setting the `REACT_APP_API_BASE_URL` environment variable to `http://localhost:3001/facts/random`.
+
+## Building for Production
+
+To create a production build of the app:
+
+1. Run the build command:
+   ```
+   npm run build
+   ```
+2. The build files will be created in the `build/` directory.

@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { ChakraProvider, Box, Container } from '@chakra-ui/react';
+import { FactsContent } from './components/FactsContent';
+import { FactType } from './interfaces/Fact';
 
-function App() {
+/**
+ * Main App component that sets up the application structure and manages global state
+ * @returns {JSX.Element} The rendered App component
+ */
+const App: React.FC = () => {
+  // State for the selected fact type
+  const [selectedType, setSelectedType] = useState<FactType>('both');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <Box bgGradient="linear(to-r, teal.500, blue.500)" minH="100vh" py={4}>
+        <Container maxW="container.md" px={4}>
+          <FactsContent 
+            selectedType={selectedType} 
+            onSelectType={setSelectedType} 
+          />
+        </Container>
+      </Box>
+    </ChakraProvider>
   );
-}
+};
 
 export default App;
