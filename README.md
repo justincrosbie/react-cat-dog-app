@@ -2,10 +2,14 @@
 
 This is a React application that displays random facts about cats and dogs. It features infinite scrolling and allows users to filter facts by animal type.
 
+This version demonstrates the usage of Redux to manage state, and decouple the components from the data. 
+Note this is overkill for such a small app, but it's just to demonstrate how Redux can be used.
+
 ## Features
 
 - Display random facts about cats and dogs
 - Filter facts by cat, dog, or both
+- Uses Redux to manage the state of the app, decoupling the components from the data
 - Infinite scrolling to load more facts
 - Responsive design for mobile and desktop
 
