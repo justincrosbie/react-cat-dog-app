@@ -1,61 +1,48 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { fetchFacts } from '../services/api';
-import { Fact, FactType } from '../interfaces/Fact';
+import { useEffect, useRef, useCallback } from 'react';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { fetchFacts, setSelectedType } from '../store/factsSlice';
 
-/** Number of facts to load per request */
 const FACTS_PER_LOAD = 10;
 
-/**
- * Custom hook for managing fact fetching and infinite scrolling
- * @param {FactType} selectedType - The currently selected type of facts
- * @returns {Object} An object containing facts, loading state, error state, and utility functions
- */
-export const useFacts = (selectedType: FactType) => {
-  const [facts, setFacts] = useState<Fact[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+export const useFacts = () => {
+  const dispatch = useAppDispatch();
+  const { selectedType, facts, loading, error } = useAppSelector(state => state.facts);
 
-  // Ref for the intersection observer
   const observer = useRef<IntersectionObserver | null>(null);
 
-  /**
-   * Fetches more facts and adds them to the existing list
-   */
-  const fetchMoreFacts = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const newFacts = await fetchFacts(selectedType, FACTS_PER_LOAD);
-      setFacts(prevFacts => [...prevFacts, ...newFacts]);
-    } catch (error) {
-      console.error('Error fetching facts:', error);
-      setError('Failed to fetch facts. Please try again later.');
-    } finally {
-      setLoading(false);
+  const loadMoreFacts = useCallback(() => {
+    if (!loading) {
+      console.log('Loading more facts...');
+      dispatch(fetchFacts({ type: selectedType, count: FACTS_PER_LOAD }));
     }
-  }, [selectedType]);
+  }, [dispatch, loading, selectedType]);
 
-  /**
-   * Callback ref for the last fact element to implement infinite scrolling
-   * @param {HTMLDivElement | null} node - The last fact element in the list
-   */
   const lastFactElementRef = useCallback((node: HTMLDivElement | null) => {
     if (loading) return;
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && !error) {
-        fetchMoreFacts();
+      if (entries[0].isIntersecting) {
+        loadMoreFacts();
       }
     });
     if (node) observer.current.observe(node);
-  }, [loading, fetchMoreFacts, error]);
+  }, [loading, loadMoreFacts]);
 
-  // Reset facts and fetch new ones when selectedType changes
+  const changeSelectedType = useCallback((newType: typeof selectedType) => {
+    console.log('Changing selected type to:', newType);
+    dispatch(setSelectedType(newType));
+  }, [dispatch]);
+
   useEffect(() => {
-    setFacts([]);
-    setError(null);
-    fetchMoreFacts();
-  }, [selectedType, fetchMoreFacts]);
+    console.log('Selected type changed, fetching initial facts...');
+    dispatch(fetchFacts({ type: selectedType, count: FACTS_PER_LOAD }));
+  }, [selectedType, dispatch]);
 
-  return { facts, loading, error, lastFactElementRef, fetchMoreFacts };
+  useEffect(() => {
+    console.log('Current facts:', facts);
+    console.log('Loading state:', loading);
+    console.log('Error state:', error);
+  }, [facts, loading, error]);
+
+  return { facts, loading, error, lastFactElementRef, loadMoreFacts, changeSelectedType };
 };

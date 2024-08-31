@@ -1,27 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
 import { ChakraProvider, Box, Container } from '@chakra-ui/react';
 import { FactsContent } from './components/FactsContent';
-import { FactType } from './interfaces/Fact';
+import { store } from './store';
 
-/**
- * Main App component that sets up the application structure and manages global state
- * @returns {JSX.Element} The rendered App component
- */
+// ... ErrorFallback component remains the same
+
 const App: React.FC = () => {
-  // State for the selected fact type
-  const [selectedType, setSelectedType] = useState<FactType>('both');
-
   return (
-    <ChakraProvider>
-      <Box bgGradient="linear(to-r, teal.500, blue.500)" minH="100vh" py={4}>
-        <Container maxW="container.md" px={4}>
-          <FactsContent 
-            selectedType={selectedType} 
-            onSelectType={setSelectedType} 
-          />
-        </Container>
-      </Box>
-    </ChakraProvider>
+    <Provider store={store}>
+      <ChakraProvider>
+          <Box bgGradient="linear(to-r, teal.500, blue.500)" minH="100vh" py={4}>
+            <Container maxW="container.md" px={4}>
+              <FactsContent />
+            </Container>
+          </Box>
+      </ChakraProvider>
+    </Provider>
   );
 };
 

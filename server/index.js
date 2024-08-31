@@ -30,6 +30,8 @@ app.get('/facts/random', (req, res) => {
 
   const this_type = animal_type || 'cat';
 
+  console.log(this_type);
+
   if (this_type !== 'cat,dog') {
     filteredFacts = allFacts.filter(fact => fact.source === this_type);
   }
