@@ -52,7 +52,7 @@ export const FactList: React.FC<FactListProps> = ({ facts, lastFactElementRef })
           <Text fontSize="lg">
             {/* Emoji indicator for fact type */}
             <Text as="span" fontSize="2xl" mr={2}>
-              {fact.source === 'cat' ? '🐱' : '🐶'}
+              {fact.type === 'cat' ? '🐱' : '🐶'}
             </Text>
             {/* Fact text */}
             {fact.text}
