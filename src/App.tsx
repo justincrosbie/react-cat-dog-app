@@ -9,16 +9,11 @@ import { FactType } from './interfaces/Fact';
  */
 const App: React.FC = () => {
   // State for the selected fact type
-  const [selectedType, setSelectedType] = useState<FactType>('both');
-
   return (
     <ChakraProvider>
       <Box bgGradient="linear(to-r, teal.500, blue.500)" minH="100vh" py={4}>
         <Container maxW="container.md" px={4}>
-          <FactsContent 
-            selectedType={selectedType} 
-            onSelectType={setSelectedType} 
-          />
+          <FactsContent/>
         </Container>
       </Box>
     </ChakraProvider>
