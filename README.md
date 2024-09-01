@@ -10,6 +10,20 @@ This is a React application that displays random facts about cats and dogs. It f
 - Uses a Context to manage the selection state of the app, decoupling the components from the data
 - Responsive design for mobile and desktop
 
+## Variants
+
+### Redux
+
+This version demonstrates the usage of Redux with Redux Toolkit to manage state, and decouple the components from the data. 
+Note this is overkill for such a small app, but it's just to demonstrate how Redux can be used.
+
+See the `redux` branch for this version.
+
+### Context
+
+This version uses a Context to manage the selection state of the app, decoupling the components from the state data.
+See the `context` branch for this version.
+
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
