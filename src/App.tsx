@@ -1,26 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChakraProvider, Box, Container } from '@chakra-ui/react';
 import { FactsContent } from './components/FactsContent';
-import { FactType } from './interfaces/Fact';
+import { FactTypeProvider } from './contexts/FactTypeContext';
 
 /**
  * Main App component that sets up the application structure and manages global state
  * @returns {JSX.Element} The rendered App component
  */
 const App: React.FC = () => {
-  // State for the selected fact type
-  const [selectedType, setSelectedType] = useState<FactType>('both');
-
   return (
     <ChakraProvider>
-      <Box bgGradient="linear(to-r, teal.500, blue.500)" minH="100vh" py={4}>
-        <Container maxW="container.md" px={4}>
-          <FactsContent 
-            selectedType={selectedType} 
-            onSelectType={setSelectedType} 
-          />
-        </Container>
-      </Box>
+      <FactTypeProvider>
+        <Box bgGradient="linear(to-r, teal.500, blue.500)" minH="100vh" py={4}>
+          <Container maxW="container.md" px={4}>
+            <FactsContent />
+          </Container>
+        </Box>
+      </FactTypeProvider>
     </ChakraProvider>
   );
 };

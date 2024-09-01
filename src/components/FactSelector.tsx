@@ -1,17 +1,6 @@
 import React from 'react';
 import { Button, Flex, useBreakpointValue } from '@chakra-ui/react';
-import { FactType } from '../interfaces/Fact';
-
-/**
- * Props for the FactSelector component
- * @interface FactSelectorProps
- * @property {FactType} selectedType - The currently selected fact type
- * @property {(type: FactType) => void} onSelect - Callback function to handle type selection
- */
-interface FactSelectorProps {
-  selectedType: FactType;
-  onSelect: (type: FactType) => void;
-}
+import { useFactType } from '../contexts/FactTypeContext';
 
 /**
  * FactSelector Component
@@ -24,7 +13,9 @@ interface FactSelectorProps {
  * @param {FactSelectorProps} props - The props for the FactSelector component
  * @returns {React.FC} A React functional component
  */
-export const FactSelector: React.FC<FactSelectorProps> = ({ selectedType, onSelect }) => {
+export const FactSelector: React.FC = () => {
+  const { selectedType, setSelectedType } = useFactType();
+
   // Use Chakra UI's useBreakpointValue hook for responsive design
   const buttonSize = useBreakpointValue({ base: 'sm', md: 'md' });
   const flexDirection = useBreakpointValue({ base: 'column', sm: 'row' }) as 'column' | 'row';
@@ -40,7 +31,7 @@ export const FactSelector: React.FC<FactSelectorProps> = ({ selectedType, onSele
     >
       {/* Cat Facts Button */}
       <Button
-        onClick={() => onSelect('cat')}
+        onClick={() => setSelectedType('cat')}
         colorScheme="teal"
         variant={selectedType === 'cat' ? 'solid' : 'outline'}
         leftIcon={<span role="img" aria-label="cat">🐱</span>}
@@ -53,7 +44,7 @@ export const FactSelector: React.FC<FactSelectorProps> = ({ selectedType, onSele
 
       {/* Dog Facts Button */}
       <Button
-        onClick={() => onSelect('dog')}
+        onClick={() => setSelectedType('dog')}
         colorScheme="blue"
         variant={selectedType === 'dog' ? 'solid' : 'outline'}
         leftIcon={<span role="img" aria-label="dog">🐶</span>}
@@ -66,7 +57,7 @@ export const FactSelector: React.FC<FactSelectorProps> = ({ selectedType, onSele
 
       {/* Both (Cat and Dog) Facts Button */}
       <Button
-        onClick={() => onSelect('both')}
+        onClick={() => setSelectedType('both')}
         colorScheme="purple"
         variant={selectedType === 'both' ? 'solid' : 'outline'}
         leftIcon={<span role="img" aria-label="both">🐾</span>}
