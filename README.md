@@ -9,6 +9,7 @@ This is a React application that displays random facts about cats and dogs. It f
 - Infinite scrolling to load more facts using a custom hook
 - Uses a Context to manage the selection state of the app, decoupling the components from the data
 - Responsive design for mobile and desktop
+- Uses the Chakra-UI library for pretty components and styling
 
 ## Variants
 
