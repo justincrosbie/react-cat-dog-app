@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChakraProvider, Box, Container } from '@chakra-ui/react';
 import { FactsContent } from './components/FactsContent';
-import { FactType } from './interfaces/Fact';
 
 /**
  * Main App component that sets up the application structure and manages global state
