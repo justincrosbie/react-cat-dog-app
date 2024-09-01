@@ -1,11 +1,6 @@
 import React from 'react';
 import { Button, Flex, useBreakpointValue } from '@chakra-ui/react';
-
-/**
- * Represents the type of facts to be displayed
- * @typedef {'cat' | 'dog' | 'both'} FactType
- */
-type FactType = 'cat' | 'dog' | 'both';
+import { FactType } from '../interfaces/Fact';
 
 /**
  * Props for the FactSelector component
