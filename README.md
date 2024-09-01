@@ -37,11 +37,11 @@ To install the Cat and Dog Facts App, follow these steps:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/justincrosbie/react-cat-dog-facts.git
+   git clone https://github.com/justincrosbie/react-cat-dog-app.git
    ```
 2. Navigate to the project directory:
    ```
-   cd react-cat-dog-facts
+   cd react-cat-dog-app
    ```
 3. Install the dependencies:
    ```
