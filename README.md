@@ -7,6 +7,7 @@ This is a React application that displays random facts about cats and dogs. It f
 - Display random facts about cats and dogs
 - Filter facts by cat, dog, or both
 - Infinite scrolling to load more facts using a custom hook
+- Uses a Context to manage the selection state of the app, decoupling the components from the data
 - Responsive design for mobile and desktop
 
 ## Prerequisites
