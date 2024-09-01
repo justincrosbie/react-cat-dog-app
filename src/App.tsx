@@ -4,8 +4,6 @@ import { ChakraProvider, Box, Container } from '@chakra-ui/react';
 import { FactsContent } from './components/FactsContent';
 import { store } from './store';
 
-// ... ErrorFallback component remains the same
-
 const App: React.FC = () => {
   return (
     <Provider store={store}>

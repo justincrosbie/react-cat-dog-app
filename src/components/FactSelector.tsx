@@ -7,7 +7,17 @@ interface FactSelectorProps {
   onSelectType: (type: FactType) => void;
 }
 
+/**
+ * FactSelector component
+ * 
+ * This component renders a set of buttons that allow the user to select
+ * the type of facts they want to see (cat, dog, or both).
+ * 
+ * @param {Object} props - Component props
+ * @param {Function} props.onSelectType - Callback function to handle type selection
+ */
 export const FactSelector: React.FC<FactSelectorProps> = ({ onSelectType }) => {
+  // Get the currently selected fact type from the Redux store
   const selectedType = useAppSelector((state) => state.facts.selectedType);
 
   // Use Chakra UI's useBreakpointValue hook for responsive design

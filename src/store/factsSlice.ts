@@ -16,6 +16,9 @@ const initialState: FactsState = {
   error: null,
 };
 
+/**
+ * Async thunk for fetching facts
+ */
 export const fetchFacts = createAsyncThunk(
   'facts/fetchFacts',
   async (params: { type: FactType; count: number }, { getState, rejectWithValue }) => {
@@ -30,24 +33,31 @@ export const fetchFacts = createAsyncThunk(
   }
 );
 
+/**
+ * Slice for managing facts state
+ */
 const factsSlice = createSlice({
   name: 'facts',
   initialState,
   reducers: {
+    // Action to set the selected fact type
     setSelectedType: (state, action: PayloadAction<FactType>) => {
       state.selectedType = action.payload;
       state.facts = []; // Clear facts when type changes
       console.log('Selected type changed:', action.payload);
       console.log('Facts cleared');
     },
+    // Action to manually set facts
     setFacts: (state, action: PayloadAction<Fact[]>) => {
       state.facts = action.payload;
       console.log('Facts set manually:', state.facts);
     },
+    // Action to set loading state
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
       console.log('Loading state changed:', state.loading);
     },
+    // Action to set error state
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
       console.log('Error state changed:', state.error);
@@ -55,17 +65,20 @@ const factsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Handle pending state of fetchFacts
       .addCase(fetchFacts.pending, (state) => {
         state.loading = true;
         state.error = null;
         console.log('Fetching facts... (pending)');
       })
+      // Handle successful fetchFacts
       .addCase(fetchFacts.fulfilled, (state, action) => {
         state.facts = [...state.facts, ...action.payload];
         state.loading = false;
         console.log('Facts updated in Redux state:', state.facts);
         console.log('Total facts count:', state.facts.length);
       })
+      // Handle rejected fetchFacts
       .addCase(fetchFacts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
@@ -74,5 +87,8 @@ const factsSlice = createSlice({
   },
 });
 
+// Export actions
 export const { setSelectedType, setFacts, setLoading, setError } = factsSlice.actions;
+
+// Export reducer
 export default factsSlice.reducer;
